@@ -19,7 +19,7 @@
     "highcharts-vue"
   ],
   "dependencies": {
-    "@gdyfe/mic-server": "1.0.4",
+    "@gdyfe/mic-server": "1.0.5",
     "core-js": "^3.6.5",
     "highcharts": "^8.2.0",
     "highcharts-vue": "^1.3.5",
