@@ -99,5 +99,5 @@ Vue.use(micServer);
 | 属性  | 说明 |   类型   | 默认值 |
 | :--- | :--: | :------: | :----: |
 | Array  | | | |
-| &nbsp;&nbsp;  state  | 使用状态 | `Number` | `-` |
+| &nbsp;&nbsp;  state  | 使用状态 | `String` | `-` |
 | &nbsp;&nbsp; percent | 状态占比 | `Number` | `-` |
