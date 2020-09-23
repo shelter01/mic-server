@@ -37,16 +37,16 @@ Vue.use(micServer);
 ## 使用
 
 ```html
-<gdy-mic-server :runIns="runIns" :destroyedIns="destroyedIns" :closedIns="closedIns" :startingIns="startingIns" :resourceOccupation="resourceOccupation"></gdy-mic-server>
+<gdy-mic-server :runIns="runIns" :destroyedIns="destroyedIns" :closedIns="closedIns" :serviceNum="serviceNum" :resourceOccupation="resourceOccupation"/>
 ```
 
 ### title 属性
 
 类型`String`
 
-| 属性 |    说明    |   类型   | 可选值 |    默认值    |
-| :--  | :--------: | :------: | :----: | :----------: |
-| name | 左上角名称 | `String` |  ---   | `微服务结构` |
+| 属性 |    说明    |   类型   |    默认值    |
+| :--  | :--------: | :------: | :----------: |
+| name | 左上角名称 | `String` | `微服务结构` |
 
 ### runIns 属性
 
@@ -55,7 +55,6 @@ Vue.use(micServer);
 |  属性   |  说明  |   类型   | 默认值 |
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
-| &nbsp;&nbsp;  id  |  序号  | `Number` | `-` |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
 | &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
 
@@ -66,7 +65,6 @@ Vue.use(micServer);
 |  属性   |  说明  |   类型   | 默认值 |
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
-| &nbsp;&nbsp;  id  |  序号  | `Number` | `-` |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
 | &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
 
@@ -77,18 +75,16 @@ Vue.use(micServer);
 |  属性   |  说明  |   类型   | 默认值 |
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
-| &nbsp;&nbsp;  id  |  序号  | `Number` | `-` |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
 | &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
 
-### startingIns 属性
+### serviceNum 属性
 
 类型`Array`
 
 |  属性   |  说明  |   类型   | 默认值 |
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
-| &nbsp;&nbsp;  id  |  序号  | `Number` | `-` |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
 | &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
 
@@ -99,5 +95,16 @@ Vue.use(micServer);
 | 属性  | 说明 |   类型   | 默认值 |
 | :--- | :--: | :------: | :----: |
 | Array  | | | |
-| &nbsp;&nbsp;  state  | 使用状态 | `String` | `-` |
-| &nbsp;&nbsp; percent | 状态占比 | `Number` | `-` |
+| &nbsp;&nbsp;  used  | 使用占比 | `Number` | `-` |
+| &nbsp;&nbsp;  free  | 空闲占比 | `Number` | `-` |
+
+### perNum 属性
+
+类型`Array`
+
+| 属性 |    说明    |   类型   |   默认值    |
+| :--: | :--------: | :------: | :--: |
+| workingNum | 运行实例数量 | `Number` | `-` |
+| closeNum | 关闭实例数量 | `Number` | `-` |
+| destroyNum | 销毁实例数量 | `Number` | `-` |
+| serviceNum | 服务实例数量 | `Number` | `-` |

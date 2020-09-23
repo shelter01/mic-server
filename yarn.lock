@@ -910,6 +910,17 @@
     highcharts-vue "^1.3.5"
     vue "^2.6.11"
 
+"@gdyfe/mic-server@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/@gdyfe/mic-server/-/mic-server-1.0.7.tgz#f4b6207b599a1e5276de49462b3036d3cf6c0b0e"
+  integrity sha512-TGGqEVKjJEeuVle0de1Rb9mIS4Uzhe7o7O/GRggMXU688p+qupgDGvgeiuTo9rI10ysao5/UClytuCpyYij18w==
+  dependencies:
+    "@gdyfe/mic-server" "1.0.5"
+    core-js "^3.6.5"
+    highcharts "^8.2.0"
+    highcharts-vue "^1.3.5"
+    vue "^2.6.11"
+
 "@gdyfe/mic-server@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@gdyfe/mic-server/-/mic-server-1.0.2.tgz#7254f4ba0ba31fe6820da6d9f1f8f12d5ae08353"

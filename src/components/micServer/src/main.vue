@@ -16,11 +16,11 @@
         </div>
         <ul>
           <li
-            v-for="item in dataList[0]"
-            :key="item.id"
+            v-for="(item, index) in dataList[0]"
+            :key="item.name"
             class="server-list-bd-tr"
           >
-            <div class="server-list-bd-td">{{ item.id }}</div>
+            <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
             <div class="server-list-bd-td">{{ item.type }}</div>
           </li>
@@ -40,11 +40,11 @@
         </div>
         <ul>
           <li
-            v-for="item in dataList[1]"
-            :key="item.id"
+            v-for="(item, index) in dataList[1]"
+            :key="item.name"
             class="server-list-bd-tr"
           >
-            <div class="server-list-bd-td">{{ item.id }}</div>
+            <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
             <div class="server-list-bd-td">{{ item.type }}</div>
           </li>
@@ -89,11 +89,11 @@
         </div>
         <ul>
           <li
-            v-for="item in dataList[2]"
-            :key="item.id"
+            v-for="(item, index) in dataList[2]"
+            :key="item.name"
             class="server-list-bd-tr"
           >
-            <div class="server-list-bd-td">{{ item.id }}</div>
+            <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
             <div class="server-list-bd-td">{{ item.type }}</div>
           </li>
@@ -103,7 +103,7 @@
         <div class="server-list-hd">
           <div class="server-list-hd-title">
             <div class="server-list-hd-title-line">|</div>
-            <div class="server-list-hd-title-text">当前启动中实例</div>
+            <div class="server-list-hd-title-text">当前服务实例</div>
           </div>
           <div class="server-list-hd-tr">
             <div class="server-list-hd-tr-td">序号</div>
@@ -113,11 +113,11 @@
         </div>
         <ul>
           <li
-            v-for="item in dataList[3]"
-            :key="item.id"
+            v-for="(item, index) in dataList[3]"
+            :key="item.name"
             class="server-list-bd-tr"
           >
-            <div class="server-list-bd-td">{{ item.id }}</div>
+            <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
             <div class="server-list-bd-td">{{ item.type }}</div>
           </li>
@@ -160,13 +160,19 @@ export default {
         return []
       }
     },
-    startingIns: {
+    serviceIns: {
       type: Array,
       default() {
         return []
       }
     },
     resourceOccupation: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    perNum: {
       type: Array,
       default() {
         return []
@@ -346,32 +352,24 @@ export default {
           type: 'pie',
           data: [
             {
-              name: `当前实例关闭数量：${this.closedIns.length}`,
-              // y: this.closedIns.length,
-              // h: this.closedIns.length * 7
-              y: 8,
-              h: 56
+              name: `当前实例开启数量：${this.perNum[0]}`,
+              y: this.perNum[0],
+              h: this.perNum[0] * 7
             },
             {
-              name: `启动中：${this.startingIns.length}`,
-              // y: this.startingIns.length,
-              // h: this.startingIns.length * 7
-              y: 4,
-              h: 28
+              name: `当前实例关闭数量：${this.perNum[1]}`,
+              y: this.perNum[1],
+              h: this.perNum[1] * 7
             },
             {
-              name: `已销毁实例数量：${this.destroyedIns.length}`,
-              // y: this.destroyedIns.length,
-              // h: this.destroyedIns.length * 7
-              y: 3,
-              h: 21
+              name: `已销毁实例数量：${this.perNum[2]}`,
+              y: this.perNum[2],
+              h: this.perNum[2] * 7
             },
             {
-              name: `当前开启实例数量：${this.runIns.length}`,
-              // y: this.runIns.length,
-              // h: this.runIns.length * 7
-              y: 5,
-              h: 35
+              name: `当前服务实例数量：${this.perNum[3]}`,
+              y: this.perNum[3],
+              h: this.perNum[3] * 7
             }
           ],
           colors: ['#E520FB', '#35CFE8', '#103DFF', '#8A4CFF'],
@@ -399,9 +397,8 @@ export default {
         series
       }
     },
-    // return [this.runIns, this.destroyedIns, this.closedIns, this.startingIns]
     dataList() {
-      return [this.runIns, this.destroyedIns, this.closedIns, this.startingIns]
+      return [this.runIns, this.destroyedIns, this.closedIns, this.serviceIns]
     }
   }
 }
