@@ -56,7 +56,7 @@ Vue.use(micServer);
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
+| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
 
 ### destroyedIns 属性
 
@@ -66,7 +66,7 @@ Vue.use(micServer);
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
+| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
 
 ### closedIns 属性
 
@@ -76,9 +76,9 @@ Vue.use(micServer);
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
+| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
 
-### serviceNum 属性
+### serviceIns 属性
 
 类型`Array`
 
@@ -86,7 +86,7 @@ Vue.use(micServer);
 | :----- | :----: | :------:| :----: |
 | Object  | | | |
 | &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `String` | `-` |
+| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
 
 ### resourceOccupation 属性
 

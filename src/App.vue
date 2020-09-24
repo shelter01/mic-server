@@ -13,21 +13,23 @@
 
 <script>
 import Vue from 'vue'
-import micServer from '@gdyfe/mic-server'
-Vue.use(micServer)
+// import micServer from '@gdyfe/mic-server'
+import axios from 'axios'
+// Vue.use(micServer)
+Vue.prototype.$http = axios
 
 // import micServer from './components/micServer';
-// import micServer from './components/micServer/src/main'
+import micServer from './components/micServer/src/main'
 
-export default {/*
+export default {/**/
   components: {
     'gdyMicServer': micServer
-  },*/
+  },
   name: 'App',
   data() {
     return {
-      used: 35,
-      unused: 65,
+      use: 35,
+      free: 65,
       workingNum: 5, // 运行中实例数
       closeNum: 8,//关闭实例数
       destroyNum: 3,//已销毁实例数
@@ -110,44 +112,41 @@ export default {/*
           type: '制作导播台'
         }
       ],
-      serviceIns: [
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        }
-      ]
+      serviceIns: []
     }
   },
   computed: {
     resourceOccupation() {
       return [
-        ['使用中', this.used],
-        ['未使用', this.unused]
+        ['使用中', this.use],
+        ['未使用', this.free]
       ]
     },
     perNum() {
       return [ this.workingNum, this.closeNum, this.destroyNum, this.serviceNum ]
     }
+  },
+  methods: {
+    async getDataList(){
+      const { data: res } = await this.$http.get('http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor')
+      console.log(res)
+      this.serviceIns = res.list.serviceList.slice(0, 6)
+      this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
+      this.serviceNum = res.list.serviceNum
+      this.use = res.list.use
+      this.free = res.list.free
+    }
+  },
+  mounted() {
+    this.getDataList()
+    this.timer = window.setInterval(() => {
+      setTimeout(() => {
+        this.getDataList()
+      },0)
+    },3000)
+  },
+  destroyed() {
+    window.clearInterval(this.timer)
   }
 }
 </script>
