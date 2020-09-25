@@ -13,18 +13,18 @@
 
 <script>
 import Vue from 'vue'
-// import micServer from '@gdyfe/mic-server'
+import micServer from '@gdyfe/mic-server'
 import axios from 'axios'
-// Vue.use(micServer)
+Vue.use(micServer)
 Vue.prototype.$http = axios
 
 // import micServer from './components/micServer';
-import micServer from './components/micServer/src/main'
+// import micServer from './components/micServer/src/main'
 
-export default {/**/
+export default {/*
   components: {
     'gdyMicServer': micServer
-  },
+  },*/
   name: 'App',
   data() {
     return {
@@ -32,8 +32,8 @@ export default {/**/
       free: 65,
       workingNum: 5, // 运行中实例数
       closeNum: 8,//关闭实例数
-      destroyNum: 3,//已销毁实例数
-      serviceNum: 4,//服务实例数
+      destroyNum: 6,//已销毁实例数
+      serviceNum: 0,//服务实例数
       runIns: [
         {
           name: 'xxx实例名称',
@@ -130,7 +130,7 @@ export default {/**/
     async getDataList(){
       const { data: res } = await this.$http.get('http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor')
       console.log(res)
-      this.serviceIns = res.list.serviceList.slice(0, 6)
+      this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
       this.serviceNum = res.list.serviceNum
       this.use = res.list.use
@@ -140,9 +140,10 @@ export default {/**/
   mounted() {
     this.getDataList()
     this.timer = window.setInterval(() => {
-      setTimeout(() => {
-        this.getDataList()
-      },0)
+      // setTimeout(() => {
+      //   this.getDataList()
+      // },0)
+      this.getDataList()
     },3000)
   },
   destroyed() {

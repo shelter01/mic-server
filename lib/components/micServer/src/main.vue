@@ -17,7 +17,7 @@
         <ul>
           <li
             v-for="(item, index) in dataList[0]"
-            :key="item.name"
+            :key="index"
             class="server-list-bd-tr"
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
@@ -41,7 +41,7 @@
         <ul>
           <li
             v-for="(item, index) in dataList[1]"
-            :key="item.name"
+            :key="index"
             class="server-list-bd-tr"
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
@@ -90,7 +90,7 @@
         <ul>
           <li
             v-for="(item, index) in dataList[2]"
-            :key="item.name"
+            :key="index"
             class="server-list-bd-tr"
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
@@ -103,12 +103,12 @@
         <div class="server-list-hd">
           <div class="server-list-hd-title">
             <div class="server-list-hd-title-line">|</div>
-            <div class="server-list-hd-title-text">当前服务实例</div>
+            <div class="server-list-hd-title-text">服务器</div>
           </div>
           <div class="server-list-hd-tr">
             <div class="server-list-hd-tr-td">序号</div>
-            <div class="server-list-hd-tr-td">实例名称</div>
-            <div class="server-list-hd-tr-td">实例类型</div>
+            <div class="server-list-hd-tr-td">IP</div>
+            <div class="server-list-hd-tr-td">cpu/容器数量</div>
           </div>
         </div>
         <ul>
@@ -119,7 +119,7 @@
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
-            <div class="server-list-bd-td">{{ item.type }}</div>
+            <div class="server-list-bd-td">{{ item.cpu }}</div>
           </li>
         </ul>
       </div>
@@ -367,14 +367,15 @@ export default {
               h: this.perNum[2] * 7
             },
             {
-              name: `当前服务实例数量：${this.perNum[3]}`,
+              name: `使用中服务器数量：${this.perNum[3]}`,
               y: this.perNum[3],
               h: this.perNum[3] * 7
             }
           ],
           colors: ['#E520FB', '#35CFE8', '#103DFF', '#8A4CFF'],
           size: '50%',
-          center: ['50%', '60%']
+          center: ['50%', '60%'],
+          animation: false
         }
       ]
       return {
@@ -389,7 +390,8 @@ export default {
           data: this.resourceOccupation,
           colors: ['#046EE7', '#3AF2A8'],
           size: '65%',
-          center: ['53%', '49.5%']
+          center: ['53%', '49.5%'],
+          animation: false
         }
       ]
       return {
@@ -398,7 +400,12 @@ export default {
       }
     },
     dataList() {
-      return [this.runIns, this.destroyedIns, this.closedIns, this.serviceIns]
+      return [
+        this.runIns,
+        this.destroyedIns,
+        this.closedIns,
+        this.serviceIns
+      ]
     }
   }
 }
