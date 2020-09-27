@@ -1,6 +1,6 @@
 <template>
   <div class="mic-server">
-    <div class="server-title">微服务结构</div>
+    <div class="server-title">{{title}}</div>
     <div class="server-left">
       <div class="server-list">
         <div class="server-list-hd">
@@ -144,12 +144,18 @@ export default {
       default() {
         return '微服务结构'
       }
+    },
+    url: {
+      type: String,
+      default() {
+        return 'http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor'
+      }
     }
   },
   data() {
     return {
-      use: 35,
-      free: 65,
+      use: 0,
+      free: 0,
       workingNum: 5, // 运行中实例数
       closeNum: 8,//关闭实例数
       destroyNum: 6,//已销毁实例数
@@ -180,58 +186,8 @@ export default {
           type: '制作导播台'
         }
       ],
-      destroyedIns: [
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        }
-      ],
-      closedIns: [
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        }
-      ],
+      destroyedIns: [],
+      closedIns: [],
       serviceIns: [],
       pie3dConfig: {
         chart: {
@@ -325,11 +281,13 @@ export default {
   },
   methods: {
     async getDataList(){
-      const { data: res } = await this.$http.get('http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor')
+      const { data: res } = await this.$http.get(this.url)
       // console.log(res)
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
       this.serviceNum = res.list.serviceNum
+      this.destroyedIns = this.runIns
+      this.closedIns = this.runIns
       this.use = res.list.use
       this.free = res.list.free
     },
@@ -400,7 +358,7 @@ export default {
       )
     }
   },
-  created() {
+  beforeMount() {
     this.pieHigh()
   },
   components: {
@@ -468,7 +426,7 @@ export default {
     this.getDataList()
     this.timer = window.setInterval(() => {
       this.getDataList()
-    },3000)
+    },2000)
   },
   destroyed() {
     window.clearInterval(this.timer)

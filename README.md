@@ -14,7 +14,7 @@ npm install @gdyfe/mic-server
 
 - yarn 安装
 
-```
+```bash
 yarn add @gdyfe/mic-server
 ```
 
@@ -37,7 +37,7 @@ Vue.use(micServer);
 ## 使用
 
 ```html
-<gdy-mic-server :runIns="runIns" :destroyedIns="destroyedIns" :closedIns="closedIns" :serviceNum="serviceNum" :resourceOccupation="resourceOccupation"/>
+<gdy-mic-server :title="title" :url="url"/>
 ```
 
 ### title 属性
@@ -45,66 +45,13 @@ Vue.use(micServer);
 类型`String`
 
 | 属性 |    说明    |   类型   |    默认值    |
-| :--  | :--------: | :------: | :----------: |
+| :--:  | :--------: | :------: | :----------: |
 | name | 左上角名称 | `String` | `微服务结构` |
 
 ### runIns 属性
 
-类型`Array`
+类型`String`
 
 |  属性   |  说明  |   类型   | 默认值 |
-| :----- | :----: | :------:| :----: |
-| Object  | | | |
-| &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
-
-### destroyedIns 属性
-
-类型`Array`
-
-|  属性   |  说明  |   类型   | 默认值 |
-| :----- | :----: | :------:| :----: |
-| Object  | | | |
-| &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
-
-### closedIns 属性
-
-类型`Array`
-
-|  属性   |  说明  |   类型   | 默认值 |
-| :----- | :----: | :------:| :----: |
-| Object  | | | |
-| &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
-
-### serviceIns 属性
-
-类型`Array`
-
-|  属性   |  说明  |   类型   | 默认值 |
-| :----- | :----: | :------:| :----: |
-| Object  | | | |
-| &nbsp;&nbsp; name | 实例名称 | `String` | `-` |
-| &nbsp;&nbsp; type | 实例类型 | `Number` | `-` |
-
-### resourceOccupation 属性
-
-类型`Array`
-
-| 属性  | 说明 |   类型   | 默认值 |
-| :--- | :--: | :------: | :----: |
-| Array  | | | |
-| &nbsp;&nbsp;  used  | 使用占比 | `Number` | `-` |
-| &nbsp;&nbsp;  free  | 空闲占比 | `Number` | `-` |
-
-### perNum 属性
-
-类型`Array`
-
-| 属性 |    说明    |   类型   |   默认值    |
-| :--: | :--------: | :------: | :--: |
-| workingNum | 运行实例数量 | `Number` | `-` |
-| closeNum | 关闭实例数量 | `Number` | `-` |
-| destroyNum | 销毁实例数量 | `Number` | `-` |
-| serviceNum | 服务实例数量 | `Number` | `-` |
+| :-----: | :----: | :------:| :----: |
+| url  | 初始请求地址| `String` | `http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor` |
