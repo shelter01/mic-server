@@ -129,7 +129,7 @@ export default {/*
   methods: {
     async getDataList(){
       const { data: res } = await this.$http.get('http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor')
-      console.log(res)
+      // console.log(res)
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
       this.serviceNum = res.list.serviceNum

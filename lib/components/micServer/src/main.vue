@@ -417,20 +417,6 @@ export default {
 @textWhite: #efefef;
 @textGreen: #2ec2b8;
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  li {
-    list-style: none;
-  }
-}
-
 .box() {
   .server-list {
     position: absolute;
