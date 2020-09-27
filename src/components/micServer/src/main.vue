@@ -16,7 +16,7 @@
         </div>
         <ul>
           <li
-            v-for="(item, index) in dataList[0]"
+            v-for="(item, index) in runIns"
             :key="index"
             class="server-list-bd-tr"
           >
@@ -40,7 +40,7 @@
         </div>
         <ul>
           <li
-            v-for="(item, index) in dataList[1]"
+            v-for="(item, index) in destroyedIns"
             :key="index"
             class="server-list-bd-tr"
           >
@@ -89,7 +89,7 @@
         </div>
         <ul>
           <li
-            v-for="(item, index) in dataList[2]"
+            v-for="(item, index) in closedIns"
             :key="index"
             class="server-list-bd-tr"
           >
@@ -113,7 +113,7 @@
         </div>
         <ul>
           <li
-            v-for="(item, index) in dataList[3]"
+            v-for="(item, index) in serviceIns"
             :key="item.name"
             class="server-list-bd-tr"
           >
@@ -131,6 +131,9 @@
 import { Chart } from 'highcharts-vue'
 import highcharts from 'highcharts'
 import highcharts3d from 'highcharts/highcharts-3d'
+import Vue from 'vue'
+import axios from 'axios'
+Vue.prototype.$http = axios
 highcharts3d(highcharts)
 
 export default {
@@ -141,46 +144,95 @@ export default {
       default() {
         return '微服务结构'
       }
-    },
-    runIns: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    destroyedIns: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    closedIns: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    serviceIns: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    resourceOccupation: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
-    perNum: {
-      type: Array,
-      default() {
-        return []
-      }
     }
   },
   data() {
     return {
+      use: 35,
+      free: 65,
+      workingNum: 5, // 运行中实例数
+      closeNum: 8,//关闭实例数
+      destroyNum: 6,//已销毁实例数
+      serviceNum: 0,//服务实例数
+      runIns: [
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        }
+      ],
+      destroyedIns: [
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        }
+      ],
+      closedIns: [
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        },
+        {
+          name: 'xxx实例名称',
+          type: '制作导播台'
+        }
+      ],
+      serviceIns: [],
       pie3dConfig: {
         chart: {
           type: 'pie',
@@ -272,6 +324,15 @@ export default {
     }
   },
   methods: {
+    async getDataList(){
+      const { data: res } = await this.$http.get('http://ops.aodianyun.cn/admin/dbMonitor/getCenterMediaMonitor')
+      // console.log(res)
+      this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
+      this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
+      this.serviceNum = res.list.serviceNum
+      this.use = res.list.use
+      this.free = res.list.free
+    },
     //饼图3d显示配置
     pieHigh() {
       var each = highcharts.each
@@ -352,24 +413,24 @@ export default {
           type: 'pie',
           data: [
             {
-              name: `当前实例开启数量：${this.perNum[0]}`,
-              y: this.perNum[0],
-              h: this.perNum[0] * 7
+              name: `当前实例开启数量：${this.workingNum}`,
+              y: this.workingNum,
+              h: this.workingNum * 7
             },
             {
-              name: `当前实例关闭数量：${this.perNum[1]}`,
-              y: this.perNum[1],
-              h: this.perNum[1] * 7
+              name: `当前实例关闭数量：${this.closeNum}`,
+              y: this.closeNum,
+              h: this.closeNum * 7
             },
             {
-              name: `已销毁实例数量：${this.perNum[2]}`,
-              y: this.perNum[2],
-              h: this.perNum[2] * 7
+              name: `已销毁实例数量：${this.destroyNum}`,
+              y: this.destroyNum,
+              h: this.destroyNum * 7
             },
             {
-              name: `使用中服务器数量：${this.perNum[3]}`,
-              y: this.perNum[3],
-              h: this.perNum[3] * 7
+              name: `使用中服务器数量：${this.serviceNum}`,
+              y: this.serviceNum,
+              h: this.serviceNum * 7
             }
           ],
           colors: ['#E520FB', '#35CFE8', '#103DFF', '#8A4CFF'],
@@ -387,7 +448,10 @@ export default {
       let series = [
         {
           type: 'pie',
-          data: this.resourceOccupation,
+          data: [
+            ['使用中', this.use],
+            ['未使用', this.free]
+          ],
           colors: ['#046EE7', '#3AF2A8'],
           size: '65%',
           center: ['53%', '49.5%'],
@@ -398,15 +462,16 @@ export default {
         ...this.pie2dConfig,
         series
       }
-    },
-    dataList() {
-      return [
-        this.runIns,
-        this.destroyedIns,
-        this.closedIns,
-        this.serviceIns
-      ]
     }
+  },
+  mounted() {
+    this.getDataList()
+    this.timer = window.setInterval(() => {
+      this.getDataList()
+    },3000)
+  },
+  destroyed() {
+    window.clearInterval(this.timer)
   }
 }
 </script>
@@ -416,20 +481,6 @@ export default {
 @bgc: #1b1c20;
 @textWhite: #efefef;
 @textGreen: #2ec2b8;
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  li {
-    list-style: none;
-  }
-}
 
 .box() {
   .server-list {
