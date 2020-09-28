@@ -22,7 +22,7 @@
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
-            <div class="server-list-bd-td">{{ item.type }}</div>
+            <div class="server-list-bd-td">制作导播台</div>
           </li>
         </ul>
       </div>
@@ -156,11 +156,12 @@ export default {
     return {
       use: 0,
       free: 0,
-      workingNum: 5, // 运行中实例数
+      workingNum: 0, // 运行中实例数
       closeNum: 8,//关闭实例数
       destroyNum: 6,//已销毁实例数
       serviceNum: 0,//服务实例数
-      runIns: [
+      runIns: [],
+      destroyedIns: [
         {
           name: 'xxx实例名称',
           type: '制作导播台'
@@ -186,7 +187,6 @@ export default {
           type: '制作导播台'
         }
       ],
-      destroyedIns: [],
       closedIns: [],
       serviceIns: [],
       pie3dConfig: {
@@ -286,8 +286,9 @@ export default {
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
       this.serviceNum = res.list.serviceNum
-      this.destroyedIns = this.runIns
-      this.closedIns = this.runIns
+      this.runIns = res.list.workList
+      this.workingNum = res.list.workingNum
+      this.closedIns = this.destroyedIns
       this.use = res.list.use
       this.free = res.list.free
     },
@@ -358,7 +359,7 @@ export default {
       )
     }
   },
-  beforeMount() {
+  created() {
     this.pieHigh()
   },
   components: {
