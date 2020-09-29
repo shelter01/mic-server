@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <gdy-mic-server/>
+    <!-- <div style="height: 61px;"></div> -->
+    <div class="test"><gdy-mic-server/></div>
   </div>
 </template>
 
@@ -26,12 +27,9 @@ body {
   padding: 0;
   margin: 0;
 }
-
-ul {
-  margin: 0;
-  padding: 0;
-  li {
-    list-style: none;
-  }
-}
+/*
+.test {
+  width: 100%;
+  height: calc(100vh - 61px);
+}*/
 </style>

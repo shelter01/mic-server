@@ -1,6 +1,6 @@
 {
   "name": "@gdyfe/mic-server",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "main": "lib/index.js",
   "author": "shijiawei <824586637@qq.com>",
   "description": "微服务结构",
@@ -19,11 +19,12 @@
     "highcharts-vue"
   ],
   "dependencies": {
-    "@gdyfe/mic-server": "^1.0.12",
+    "@gdyfe/mic-server": "^1.0.14",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "highcharts": "^8.2.0",
     "highcharts-vue": "^1.3.5",
+    "screenfull": "^5.0.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {

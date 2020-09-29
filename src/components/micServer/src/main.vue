@@ -1,6 +1,11 @@
 <template>
-  <div class="mic-server">
+  <div class="mic-server" id="mic-server-full">
     <div class="server-title">{{title}}</div>
+    <div
+      class="full-screen"
+      @click="fullScreen"
+      title="全屏"
+    ></div>
     <div class="server-left">
       <div class="server-list">
         <div class="server-list-hd">
@@ -46,7 +51,7 @@
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
-            <div class="server-list-bd-td">{{ item.type }}</div>
+            <div class="server-list-bd-td">1</div>
           </li>
         </ul>
       </div>
@@ -60,7 +65,7 @@
         <div class="server-chart-pie3d-circle"></div>
         <highcharts
           :options="pie3d"
-          style="height: 62.69vh;width: 44.95vw;min-width: 720px;min-height: 564px"
+          style="height: 62.69vh;width: 44.95vw;"
         ></highcharts>
       </div>
       <div class="server-chart-pie">
@@ -70,7 +75,7 @@
         </div>
         <highcharts
           :options="pie2d"
-          style="height: 37.31vh;width: 44.95vw;min-width: 720px;min-height: 336px"
+          style="height: 37.31vh;width: 44.95vw;"
         ></highcharts>
       </div>
     </div>
@@ -95,7 +100,7 @@
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
-            <div class="server-list-bd-td">{{ item.type }}</div>
+            <div class="server-list-bd-td">2</div>
           </li>
         </ul>
       </div>
@@ -119,7 +124,7 @@
           >
             <div class="server-list-bd-td">{{ index+1 }}</div>
             <div class="server-list-bd-td">{{ item.name }}</div>
-            <div class="server-list-bd-td">{{ item.cpu }}</div>
+            <div class="server-list-bd-td">{{ item.cpu }}/{{item.dockerNum}}</div>
           </li>
         </ul>
       </div>
@@ -133,6 +138,7 @@ import highcharts from 'highcharts'
 import highcharts3d from 'highcharts/highcharts-3d'
 import Vue from 'vue'
 import axios from 'axios'
+import screenfull from 'screenfull'
 Vue.prototype.$http = axios
 highcharts3d(highcharts)
 
@@ -157,36 +163,11 @@ export default {
       use: 0,
       free: 0,
       workingNum: 0, // 运行中实例数
-      closeNum: 8,//关闭实例数
-      destroyNum: 6,//已销毁实例数
+      closeNum: 0,//关闭实例数
+      destroyNum: 0,//已销毁实例数
       serviceNum: 0,//服务实例数
       runIns: [],
-      destroyedIns: [
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        },
-        {
-          name: 'xxx实例名称',
-          type: '制作导播台'
-        }
-      ],
+      destroyedIns: [],
       closedIns: [],
       serviceIns: [],
       pie3dConfig: {
@@ -243,7 +224,7 @@ export default {
               enabled: true, //是否显示饼图的线形tip
               style: {
                 color: '#fff',
-                fontSize: '21px',
+                fontSize: '1.09vw',
                 fontWeight: 400
               },
               distance: '1%'
@@ -268,7 +249,7 @@ export default {
               enabled: true, //是否显示饼图的线形tip
               style: {
                 color: '#fff',
-                fontSize: '21px',
+                fontSize: '1.09vw',
                 fontWeight: 400
               },
               distance: '40%'
@@ -280,15 +261,25 @@ export default {
     }
   },
   methods: {
+    fullScreen() {
+      const el = document.getElementById('mic-server-full')
+      if (screenfull.isEnabled) {
+        // screenfull.request(el)
+        screenfull.toggle(el)
+      }
+    },
     async getDataList(){
       const { data: res } = await this.$http.get(this.url)
-      // console.log(res)
+      console.log(res)
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
+      this.runIns = res.list.workList.length > 6 ? res.list.workList.slice(0, 6) : res.list.workList
+      this.closedIns = res.list.closeList.length > 6 ? res.list.closeList.slice(0, 6) : res.list.closeList
+      this.destroyedIns = res.list.destroyList.length > 6 ? res.list.destroyList.slice(0, 6) : res.list.destroyList
       this.serviceNum = res.list.serviceNum
-      this.runIns = res.list.workList
       this.workingNum = res.list.workingNum
-      this.closedIns = this.destroyedIns
+      this.closeNum = res.list.closeNum
+      this.destroyNum = res.list.destroyNum
       this.use = res.list.use
       this.free = res.list.free
     },
@@ -441,16 +432,24 @@ export default {
 @textWhite: #efefef;
 @textGreen: #2ec2b8;
 
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
+}
+
 .box() {
   .server-list {
     position: absolute;
     background-color: @listBgc;
     width: 25.52vw;
-    min-width: 408px;
     border-radius: 0.625vw;
     overflow: hidden;
     right: 0;
-    font-size: 14px;
+    font-size: 0.73vw;
+    min-height: 10.74vh;
     &:nth-child(1) {
       top: 6.67%;
     }
@@ -460,13 +459,12 @@ export default {
     .server-list-hd {
       display: grid;
       grid-template-rows: 52.17% 47.83%;
-      min-height: 10.74vh;
-      min-height: 96px;
+      height: 10.74vh;
       .server-list-hd-title {
         display: grid;
         grid-template-columns: 7.6% 92.4%;
         align-items: center;
-        font-size: 20px;
+        font-size: 1.04vw;
         font-weight: bold;
         color: @textGreen;
         .server-list-hd-title-line {
@@ -479,7 +477,7 @@ export default {
         justify-items: center;
         align-items: center;
         color: @textGreen;
-        font-size: 14px;
+        font-size: 0.73vw;
       }
     }
     .server-list-bd-tr {
@@ -488,8 +486,7 @@ export default {
       justify-items: center;
       align-items: center;
       height: 4.16vh;
-      min-height: 37px;
-      font-size: 14px;
+      font-size: 0.73vw;
       color: @textWhite;
       &:nth-child(odd) {
         background: #2c2d31;
@@ -526,22 +523,18 @@ export default {
 
 .mic-server {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  min-width: 1600px;
-  min-height: 900px;
   display: grid;
   grid-template-columns: 27.5% 45% 27.5%;
   font-family: Helvetica;
   background-color: @bgc;
   .server-left {
     position: relative;
-    min-height: 900px;
     .box;
   }
   .server-right {
     position: relative;
-    min-height: 900px;
     .box;
     .server-list {
       left: 0;
@@ -550,21 +543,15 @@ export default {
   .server-chart {
     display: grid;
     grid-template-rows: 62.68% 37.32%;
-    min-width: 720px;
-    min-height: 900px;
     .server-chart-pie3d {
       position: relative;
       overflow: hidden;
-      min-width: 720px;
-      min-height: 564px;
       .server-chart-pie3d-base {
         position: absolute;
         bottom: -26%;
         left: 6%;
         width: 40vw;
         height: 80vh;
-        min-width: 640px;
-        min-height: 720px;
         border-radius: 50%;
         transform: scale(1, 0.5);
         background-image: radial-gradient(
@@ -581,8 +568,6 @@ export default {
         left: 6%;
         width: 40vw;
         height: 80vh;
-        min-width: 640px;
-        min-height: 720px;
         border-radius: 50%;
         animation: spread 4s infinite;
         background-color: #2ec2b8;
@@ -601,8 +586,6 @@ export default {
     .server-chart-pie {
       position: relative;
       overflow: hidden;
-      min-width: 720px;
-      min-height: 336px;
       .server-chart-pie-title {
         position: absolute;
         top: 12%;
@@ -611,8 +594,7 @@ export default {
         grid-template-columns: 7.6% 92.4%;
         align-items: center;
         width: 20vw;
-        min-width: 320px;
-        font-size: 20px;
+        font-size: 1.04vw;
         font-weight: bold;
         color: @textGreen;
         .server-chart-pie-title-line {
@@ -626,9 +608,18 @@ export default {
     position: absolute;
     top: 1.2%;
     left: 1%;
-    font-size: 24px;
-    min-width: 320px;
+    font-size: 1.25vw;
     color: #fff;
+  }
+  .full-screen {
+    position: absolute;
+    top: 1.2%;
+    right: 1%;
+    width: 1.5vw;
+    height: 1.5vw;
+    z-index: 200;
+    border: 2px solid #2ec2b8;
+    cursor: pointer;
   }
 }
 
