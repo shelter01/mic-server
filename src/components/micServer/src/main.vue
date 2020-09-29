@@ -139,6 +139,7 @@ import highcharts3d from 'highcharts/highcharts-3d'
 import Vue from 'vue'
 import axios from 'axios'
 import screenfull from 'screenfull'
+import ROP from '@whzcorcd/rop-client'
 Vue.prototype.$http = axios
 highcharts3d(highcharts)
 
@@ -160,6 +161,7 @@ export default {
   },
   data() {
     return {
+      ROP_rc: null,
       use: 0,
       free: 0,
       workingNum: 0, // 运行中实例数
@@ -261,6 +263,49 @@ export default {
     }
   },
   methods: {
+    _makeClientId() {
+      this.ROP_rc.Leave()
+      const clientId = 'chinaMedia' + String(Math.floor(Math.random() * 100000))
+      this.ROP_rc.Enter(
+        '',
+        'sub_0eb0a1a4b9a8cd57609dc641eee8e8c4',
+        clientId,
+        true
+      )
+    },
+    _DMSInit() {
+      this.ROP_rc = new ROP({
+        ICS_ADDR: 'mqttdms.aodianyun.cn',
+      })
+      this.ROP_rc.On('enter_suc', () => {
+        console.log('服务器连接成功')
+        // 实例列表
+        this.ROP_rc.Subscribe('chinaMedia_log')
+      })
+      this.ROP_rc.On('publish_data', (res, topic) => {
+        const data = JSON.parse(res)
+        if (topic === 'chinaMedia_log') {
+          if(data.type === 'memInfo'){
+            this.use = data.data.use
+            this.free = data.data.free
+          } else if(data.type === 'count') {
+            this.workingNum = data.data.workingNum
+            this.serviceNum = data.data.serviceNum
+          } else if(data.type === 'workList') {
+            this.runIns = data.data
+          }
+        }
+      })
+      this.ROP_rc.On('reconnect', (err) => {
+        console.log('重连', err)
+      })
+      this.ROP_rc.On('enter_fail', (err) => {
+        console.log('服务器连接失败', err)
+      })
+      this.ROP_rc.On('losed', () => {
+        console.log('服务器断开连接')
+      })
+    },
     fullScreen() {
       const el = document.getElementById('mic-server-full')
       if (screenfull.isEnabled) {
@@ -270,7 +315,7 @@ export default {
     },
     async getDataList(){
       const { data: res } = await this.$http.get(this.url)
-      console.log(res)
+      // console.log(res)
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
       this.runIns = res.list.workList.length > 6 ? res.list.workList.slice(0, 6) : res.list.workList
@@ -416,12 +461,11 @@ export default {
   },
   mounted() {
     this.getDataList()
-    this.timer = window.setInterval(() => {
-      this.getDataList()
-    },2000)
+    this._DMSInit()
+    this._makeClientId()
   },
-  destroyed() {
-    window.clearInterval(this.timer)
+  beforeDestroy() {
+    this.ROP_rc.Leave()
   }
 }
 </script>

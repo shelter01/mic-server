@@ -6,18 +6,16 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// import micServer from '@gdyfe/mic-server'
-// import axios from 'axios'
-// Vue.use(micServer)
-// Vue.prototype.$http = axios
+import Vue from 'vue'
+import micServer from '@gdyfe/mic-server'
+Vue.use(micServer)
 
-import micServer from './components/micServer/src/main'
+// import micServer from './components/micServer/src/main'
 
-export default {/**/
+export default {/*
   components: {
     'gdyMicServer': micServer
-  }
+  }*/
 }
 </script>
 
