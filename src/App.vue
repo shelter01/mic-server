@@ -8,7 +8,9 @@
 <script>
 import Vue from 'vue'
 import micServer from '@gdyfe/mic-server'
+import axios from 'axios'
 Vue.use(micServer)
+Vue.prototype.$axios = axios
 
 // import micServer from './components/micServer/src/main'
 

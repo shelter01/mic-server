@@ -136,11 +136,9 @@
 import { Chart } from 'highcharts-vue'
 import highcharts from 'highcharts'
 import highcharts3d from 'highcharts/highcharts-3d'
-import Vue from 'vue'
-import axios from 'axios'
+// import Vue from 'vue'
 import screenfull from 'screenfull'
 import ROP from '@whzcorcd/rop-client'
-Vue.prototype.$http = axios
 highcharts3d(highcharts)
 
 export default {
@@ -314,7 +312,7 @@ export default {
       }
     },
     async getDataList(){
-      const { data: res } = await this.$http.get(this.url)
+      const { data: res } = await this.$axios.get(this.url)
       // console.log(res)
       this.serviceIns = res.list.serviceList.length > 6 ? res.list.serviceList.slice(0, 6) : res.list.serviceList
       this.serviceIns.map(item => item.cpu = item.cpu.toFixed(2))
