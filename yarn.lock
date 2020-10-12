@@ -877,10 +877,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@gdyfe/mic-server@1.0.16":
-  version "1.0.16"
-  resolved "https://registry.npmjs.org/@gdyfe/mic-server/-/mic-server-1.0.16.tgz#b2a6b79b44ab2e2b2cd19a9dceebf4c3fc530c43"
-  integrity sha512-JcXkAvm+ymjWgInND1K773lPiN0u577QhOKHarxgent287jtfVKxtyTQ08RUkwGQEOFQ0gzjh66JualYLg1QYg==
+"@gdyfe/mic-server@1.0.17":
+  version "1.0.17"
+  resolved "https://registry.npmjs.org/@gdyfe/mic-server/-/mic-server-1.0.17.tgz#7c7779b0d910959b014c2fcb09c69f8953b04ee9"
+  integrity sha512-kuxjusUEoAifAYUh2DPJOALMHOzeAyYv1Ym4DuKWtcwDoTb9+ARwO3F/q0GFZPkeyY+HqHV3t7Xfp4BerEq6sA==
   dependencies:
     "@whzcorcd/rop-client" "^1.1.6"
     axios "^0.20.0"

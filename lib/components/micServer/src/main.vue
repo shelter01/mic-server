@@ -5,7 +5,9 @@
       class="full-screen"
       @click="fullScreen"
       title="全屏"
-    ></div>
+    >
+    <i class="iconfont">&#xe604;</i>
+    </div>
     <div class="server-left">
       <div class="server-list">
         <div class="server-list-hd">
@@ -326,7 +328,7 @@ export default {
       this.use = res.list.use
       this.free = res.list.free
     },
-    //饼图3d显示配置
+    //饼图高低显示配置
     pieHigh() {
       var each = highcharts.each
       var round = Math.round
@@ -657,10 +659,7 @@ ul {
     position: absolute;
     top: 1.2%;
     right: 1%;
-    width: 1.5vw;
-    height: 1.5vw;
     z-index: 200;
-    border: 2px solid #2ec2b8;
     cursor: pointer;
   }
 }
@@ -678,5 +677,23 @@ ul {
 
 .highcharts-credits {
   visibility: hidden;
+}
+
+@font-face {
+  font-family: 'iconfont';  /* project id 2122862 */
+  src: url('//at.alicdn.com/t/font_2122862_zf38jubazya.eot');
+  src: url('//at.alicdn.com/t/font_2122862_zf38jubazya.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2122862_zf38jubazya.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2122862_zf38jubazya.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2122862_zf38jubazya.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2122862_zf38jubazya.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  font-size: 2vw;
+  color: #2ec2b8;
+  text-align: center;
 }
 </style>
