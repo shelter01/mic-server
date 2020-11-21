@@ -7,17 +7,18 @@
 
 <script>
 import Vue from 'vue'
-import micServer from '@gdyfe/mic-server'
+// import micServer from '@gdyfe/mic-server'
 import axios from 'axios'
-Vue.use(micServer)
+// Vue.use(micServer)
 Vue.prototype.$axios = axios
 
-// import micServer from './components/micServer/src/main'
+// import micServer from '../lib/components/micServer/src/main.vue'
+import micServer from '../lib/src/views/main.vue'
 
-export default {/*
+export default {/**/
   components: {
     'gdyMicServer': micServer
-  }*/
+  }
 }
 </script>
 

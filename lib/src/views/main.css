@@ -1,0 +1,238 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+.mic-server {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 27.5% 45% 27.5%;
+  font-family: Helvetica;
+  background-color: #1b1c20;
+}
+.mic-server .server-left {
+  position: relative;
+}
+.mic-server .server-left .server-list {
+  position: absolute;
+  background-color: #232428;
+  width: 25.52vw;
+  border-radius: 0.625vw;
+  overflow: hidden;
+  right: 0;
+  font-size: 0.73vw;
+  min-height: 10.74vh;
+}
+.mic-server .server-left .server-list:nth-child(1) {
+  top: 6.67%;
+}
+.mic-server .server-left .server-list:nth-child(2) {
+  top: 57.6%;
+}
+.mic-server .server-left .server-list .server-list-hd {
+  display: grid;
+  grid-template-rows: 52.17% 47.83%;
+  height: 10.74vh;
+}
+.mic-server .server-left .server-list .server-list-hd .server-list-hd-title {
+  display: grid;
+  grid-template-columns: 7.6% 92.4%;
+  align-items: center;
+  font-size: 1.04vw;
+  font-weight: bold;
+  color: #2ec2b8;
+}
+.mic-server .server-left .server-list .server-list-hd .server-list-hd-title .server-list-hd-title-line {
+  text-align: center;
+}
+.mic-server .server-left .server-list .server-list-hd .server-list-hd-tr {
+  display: grid;
+  grid-template-columns: 19.2% 54% 26.8%;
+  justify-items: center;
+  align-items: center;
+  color: #2ec2b8;
+  font-size: 0.73vw;
+}
+.mic-server .server-left .server-list .server-list-bd-tr {
+  display: grid;
+  grid-template-columns: 19.2% 54% 26.8%;
+  justify-items: center;
+  align-items: center;
+  height: 4.16vh;
+  font-size: 0.73vw;
+  color: #efefef;
+}
+.mic-server .server-left .server-list .server-list-bd-tr:nth-child(odd) {
+  background: #2c2d31;
+}
+.mic-server .server-left .server-list .server-list-bd-tr:nth-child(1) {
+  background: linear-gradient(270deg, rgba(46, 194, 184, 0) 0%, rgba(46, 194, 184, 0.51) 82%, rgba(46, 194, 184, 0.6) 100%);
+}
+.mic-server .server-left .server-list .server-list-bd-tr:nth-child(2) {
+  background: linear-gradient(270deg, rgba(39, 180, 232, 0) 0%, rgba(39, 180, 232, 0.25) 38%, rgba(39, 180, 232, 0.4) 66%, rgba(39, 180, 232, 0.49) 89%, rgba(39, 180, 232, 0.6) 100%);
+}
+.mic-server .server-left .server-list .server-list-bd-tr:nth-child(3) {
+  background: linear-gradient(270deg, rgba(19, 50, 160, 0) 0%, rgba(18, 50, 163, 0.45) 76%, rgba(16, 49, 166, 0.6) 100%);
+}
+.mic-server .server-right {
+  position: relative;
+}
+.mic-server .server-right .server-list {
+  position: absolute;
+  background-color: #232428;
+  width: 25.52vw;
+  border-radius: 0.625vw;
+  overflow: hidden;
+  right: 0;
+  font-size: 0.73vw;
+  min-height: 10.74vh;
+}
+.mic-server .server-right .server-list:nth-child(1) {
+  top: 6.67%;
+}
+.mic-server .server-right .server-list:nth-child(2) {
+  top: 57.6%;
+}
+.mic-server .server-right .server-list .server-list-hd {
+  display: grid;
+  grid-template-rows: 52.17% 47.83%;
+  height: 10.74vh;
+}
+.mic-server .server-right .server-list .server-list-hd .server-list-hd-title {
+  display: grid;
+  grid-template-columns: 7.6% 92.4%;
+  align-items: center;
+  font-size: 1.04vw;
+  font-weight: bold;
+  color: #2ec2b8;
+}
+.mic-server .server-right .server-list .server-list-hd .server-list-hd-title .server-list-hd-title-line {
+  text-align: center;
+}
+.mic-server .server-right .server-list .server-list-hd .server-list-hd-tr {
+  display: grid;
+  grid-template-columns: 19.2% 54% 26.8%;
+  justify-items: center;
+  align-items: center;
+  color: #2ec2b8;
+  font-size: 0.73vw;
+}
+.mic-server .server-right .server-list .server-list-bd-tr {
+  display: grid;
+  grid-template-columns: 19.2% 54% 26.8%;
+  justify-items: center;
+  align-items: center;
+  height: 4.16vh;
+  font-size: 0.73vw;
+  color: #efefef;
+}
+.mic-server .server-right .server-list .server-list-bd-tr:nth-child(odd) {
+  background: #2c2d31;
+}
+.mic-server .server-right .server-list .server-list-bd-tr:nth-child(1) {
+  background: linear-gradient(270deg, rgba(46, 194, 184, 0) 0%, rgba(46, 194, 184, 0.51) 82%, rgba(46, 194, 184, 0.6) 100%);
+}
+.mic-server .server-right .server-list .server-list-bd-tr:nth-child(2) {
+  background: linear-gradient(270deg, rgba(39, 180, 232, 0) 0%, rgba(39, 180, 232, 0.25) 38%, rgba(39, 180, 232, 0.4) 66%, rgba(39, 180, 232, 0.49) 89%, rgba(39, 180, 232, 0.6) 100%);
+}
+.mic-server .server-right .server-list .server-list-bd-tr:nth-child(3) {
+  background: linear-gradient(270deg, rgba(19, 50, 160, 0) 0%, rgba(18, 50, 163, 0.45) 76%, rgba(16, 49, 166, 0.6) 100%);
+}
+.mic-server .server-right .server-list {
+  left: 0;
+}
+.mic-server .server-chart {
+  display: grid;
+  grid-template-rows: 62.68% 37.32%;
+}
+.mic-server .server-chart .server-chart-pie3d {
+  position: relative;
+  overflow: hidden;
+}
+.mic-server .server-chart .server-chart-pie3d .server-chart-pie3d-base {
+  position: absolute;
+  bottom: -26%;
+  left: 6%;
+  width: 40vw;
+  height: 80vh;
+  border-radius: 50%;
+  transform: scale(1, 0.5);
+  background-image: radial-gradient(#112c71, #122556, #0e2147, #1b1c20, #1b1c20);
+}
+.mic-server .server-chart .server-chart-pie3d .server-chart-pie3d-circle {
+  position: absolute;
+  bottom: -26%;
+  left: 6%;
+  width: 40vw;
+  height: 80vh;
+  border-radius: 50%;
+  animation: spread 4s infinite;
+  background-color: #2ec2b8;
+  opacity: 0;
+}
+.mic-server .server-chart .server-chart-pie3d .server-chart-pie3d-circle:nth-child(2) {
+  animation-delay: 1s;
+}
+.mic-server .server-chart .server-chart-pie3d .server-chart-pie3d-circle:nth-child(3) {
+  animation-delay: 2s;
+}
+.mic-server .server-chart .server-chart-pie3d .server-chart-pie3d-circle:nth-child(4) {
+  animation-delay: 3s;
+}
+.mic-server .server-chart .server-chart-pie {
+  position: relative;
+  overflow: hidden;
+}
+.mic-server .server-chart .server-chart-pie .server-chart-pie-title {
+  position: absolute;
+  top: 12%;
+  left: 6.7%;
+  display: grid;
+  grid-template-columns: 7.6% 92.4%;
+  align-items: center;
+  width: 20vw;
+  font-size: 1.04vw;
+  font-weight: bold;
+  color: #2ec2b8;
+}
+.mic-server .server-chart .server-chart-pie .server-chart-pie-title .server-chart-pie-title-line {
+  padding: 0 0.57vw;
+  text-align: center;
+}
+.mic-server .server-title {
+  position: absolute;
+  top: 1.2%;
+  left: 1%;
+  font-size: 1.25vw;
+  color: #fff;
+}
+.mic-server .full-screen {
+  position: absolute;
+  width: 1.5vw;
+  height: 1.5vw;
+  top: 1.2%;
+  right: 1%;
+  z-index: 200;
+  cursor: pointer;
+}
+.mic-server .full-screen img {
+  width: 100%;
+  height: 100%;
+}
+@keyframes spread {
+  from {
+    opacity: 1;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1, 0.5);
+  }
+}
+.highcharts-credits {
+  visibility: hidden;
+}
